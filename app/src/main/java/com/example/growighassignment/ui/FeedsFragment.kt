@@ -1,11 +1,13 @@
 package com.example.growighassignment.ui
 
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.AbsListView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.growighassignment.MainActivity
@@ -25,7 +27,11 @@ class FeedsFragment : Fragment(R.layout.fragment_feeds) {
         super.onViewCreated(view, savedInstanceState)
         binding=FragmentFeedsBinding.bind(view)
         viewModel=(activity as MainActivity).viewModel
+        onBoardingIsFinished()
         setupRecyclerView()
+        binding.fab.setOnClickListener {
+            findNavController().navigate(R.id.action_feedsFragment_to_uploadImageFragment)
+        }
         viewModel.breakingNews.observe(viewLifecycleOwner, Observer {response->
             when(response){
                 is Resource.Success ->{
@@ -98,5 +104,11 @@ class FeedsFragment : Fragment(R.layout.fragment_feeds) {
             adapter=newsAdapter
             layoutManager=LinearLayoutManager(activity)
         }
+    }
+    private fun onBoardingIsFinished(){
+        val sharedPreferences=requireActivity().getSharedPreferences("onBoarding", Context.MODE_PRIVATE)
+        val editor=sharedPreferences.edit()
+        editor.putBoolean("finished",true)
+        editor.apply()
     }
 }

@@ -11,7 +11,6 @@ import androidx.viewpager2.widget.ViewPager2
 import com.example.growighassignment.Models.OnBoardingItem
 import com.example.growighassignment.R
 import com.example.growighassignment.adapters.OnboardingItemsAdapter
-import com.example.growighassignment.databinding.FragmentHomeBinding
 import com.example.growighassignment.databinding.FragmentOnboardingBinding
 
 class OnboardingFragment : Fragment(R.layout.fragment_onboarding) {
@@ -29,9 +28,9 @@ class OnboardingFragment : Fragment(R.layout.fragment_onboarding) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         binding= FragmentOnboardingBinding.bind(view)
-        if(onBoardingIsFinished())findNavController().navigate(R.id.action_onboardingFragment_to_homeFragment)
+        if(onBoardingIsFinished())findNavController().navigate(R.id.action_onboardingFragment_to_feedsFragment)
         binding.tvSkipBotton.setOnClickListener {
-            findNavController().navigate(R.id.action_onboardingFragment_to_homeFragment)
+            findNavController().navigate(R.id.action_onboardingFragment_to_feedsFragment)
         }
 
         binding.firstfl.setOnClickListener {
@@ -39,7 +38,7 @@ class OnboardingFragment : Fragment(R.layout.fragment_onboarding) {
                 binding.onboardingViewPager.currentItem+=1
                 binding.progressCircular.progress+=25
             }else{
-                findNavController().navigate(R.id.action_onboardingFragment_to_homeFragment)
+                findNavController().navigate(R.id.action_onboardingFragment_to_feedsFragment)
             }
         }
         setUpRecyclerView()

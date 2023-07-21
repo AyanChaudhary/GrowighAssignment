@@ -2,10 +2,13 @@ package com.example.growighassignment
 
 import android.os.Build
 import android.os.Bundle
+import android.view.View
 import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.NavDestination
 import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.setupWithNavController
 import com.example.growighassignment.databinding.ActivityMainBinding
 import com.example.growighassignment.repository.ItemRepository
 import com.example.growighassignment.ui.ItemViewModel
@@ -28,10 +31,19 @@ class MainActivity : AppCompatActivity() {
         }
         val navHostFragment=supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         val navController=navHostFragment.navController
+        binding.bottomNavigationView.setupWithNavController(navController)
 
         val repository = ItemRepository()
         val viewModelProviderFactory=ItemViewModelProviderFactory(repository)
         viewModel=ViewModelProvider(this,viewModelProviderFactory).get(ItemViewModel::class.java)
+
+        navController.addOnDestinationChangedListener { _, nd: NavDestination, _ ->
+            if (nd.id == R.id.mapFragment || nd.id == R.id.onboardingFragment) {
+                binding.bottomNavigationView.visibility = View.GONE
+            } else {
+                binding.bottomNavigationView.visibility = View.VISIBLE
+            }
+        }
 
     }
 }

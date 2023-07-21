@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item android:id="@+id/feedsFragment"
+        android:icon="@drawable/outline_home_24"
+        app:iconTint="@color/white"
+        android:title="home"/>
+    <item android:id="@+id/videosFragment"
+        android:icon="@drawable/outline_slow_motion_video_24"
+        app:iconTint="@color/white"
+        android:title="videos"/>
+    <item android:id="@+id/mapFragment"
+        android:icon="@drawable/baseline_location_on_24"
+        app:iconTint="@color/white"
+        android:title="map"/>
+</menu>
